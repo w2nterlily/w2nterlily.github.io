@@ -1,260 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title> winterlily · -`♡´- </title>
-<style> 
-  /* ---------- FONT: only used for the main title ---------- */
-/* If you put the font file inside a "fonts" folder, change this to url("fonts/inmycloset.ttf") */
-@font-face {
-  font-family: "In My Closet";
-  src: url("inmycloset.ttf.ttf");
-  font-display: swap;
+/* Extra styles for the portfolio layout. Loads after style.css and uses its colors. */
+
+.tagline { font-weight: 700; font-size: 1.2rem; color: var(--accent); }
+
+/* ---------- BUTTONS ---------- */
+.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 1.5rem; }
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background: var(--ink);
+  color: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
 }
+.button:hover { background: var(--accent); border-color: var(--accent); }
+.button.ghost { background: transparent; color: var(--ink); }
+.button.ghost:hover { background: var(--lilac); border-color: var(--ink); color: var(--ink); }
+.button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
-/* ---------- COLORS: change these lines to restyle the whole site ---------- */
-:root {
-  --bg: #E8F9FF;      /* page background */
-  --paper: #FBFBFB;   /* gallery frames */
-  --card: #C4D9FF;    /* blog post boxes */
-  --lilac: #C5BAFF;   /* tape and little details */
-  --ink: #2a2663;     /* main text (deep indigo) */
-  --muted: #5a5694;   /* secondary text */
-  --accent: #4b36b5;  /* links */
-}
+/* ---------- ABOUT ---------- */
+.portrait { display: block; width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.5rem; border: 6px solid var(--paper); }
+.about-text, .section-note { max-width: 36rem; margin: 0 auto 1rem; }
+.section-note { color: var(--muted); }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* ---------- PROJECTS ---------- */
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.project { background: var(--paper); border-radius: 10px; padding: 0.9rem 0.9rem 1.4rem; border: 3px solid transparent; transition: border-color 0.2s; }
+.project:hover { border-color: var(--lilac); }
+.project h3 { margin: 0.9rem 0 0.1rem; font-size: 1.25rem; }
+.project p { margin: 0.4rem 0; }
+.project .meta { color: var(--muted); font-size: 0.9rem; }
+.thumb { display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--card); color: var(--muted); font-size: 0.9rem; }
 
-/* ---------- FONT 2: Helvetica for everything except the main title ---------- */
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  text-align: center;
-}
-a { color: var(--accent); text-underline-offset: 3px; }
-a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+/* ---------- SKILLS ---------- */
+.pills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+.pills li { background: var(--lilac); padding: 0.35rem 1rem; border-radius: 999px; font-weight: 600; font-size: 0.95rem; }
 
-.wrap { max-width: 860px; margin: 0 auto; padding: 0 1.25rem; }
+/* ---------- EXPERIENCE ---------- */
+.timeline { list-style: none; margin: 0 auto; padding: 0; max-width: 560px; }
+.timeline li { padding: 1rem 0; border-bottom: 2px solid var(--card); }
+.timeline strong { display: block; font-size: 1.1rem; }
+.timeline span { display: block; color: var(--muted); font-size: 0.95rem; }
+.timeline p { margin: 0.4rem 0 0; }
 
-/* ---------- NAV ---------- */
-nav { padding: 1.25rem 0; }
-nav .wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.75rem; }
-nav a { color: var(--ink); text-decoration: none; font-weight: 700; }
-nav a:hover { color: var(--accent); text-decoration: underline; }
-
-/* ---------- INTRO ---------- */
-.intro { padding: 3rem 0 2rem; }
-.intro h1 {
-  font-family: "In My Closet", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  font-size: clamp(3rem, 11vw, 6rem);
-  line-height: 1.25;
-  letter-spacing: 0.1em;   /* this is what stops the l and i from overlapping */
-  margin: 0 0 1rem;
-}
-.intro p { max-width: 36rem; margin: 0 auto 1rem; }
-.intro .small { color: var(--muted); font-style: italic; }
-
-section { padding: 2.5rem 0; }
-h2 { font-size: 2rem; margin: 0 0 1.25rem; letter-spacing: -0.01em; }
-
-/* ---------- BLOG ---------- */
-.post {
-  background: var(--card);
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  margin: 0 auto 0.9rem;
-  max-width: 640px;
-}
-.post summary { cursor: pointer; font-weight: 700; font-size: 1.2rem; list-style-position: inside; }
-.post time { display: block; color: var(--muted); font-size: 0.9rem; font-weight: 400; }
-.post p { margin: 0.9rem auto 0.3rem; max-width: 34rem; }
-
-/* ---------- FAVORITES ---------- */
-.favs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-.fav-group { border-top: 4px solid var(--lilac); padding-top: 0.75rem; }
-.fav-group h3 { margin: 0 0 0.4rem; font-size: 1.15rem; }
-.fav-group ul { margin: 0; padding: 0; list-style: none; }
-
-/* ---------- DESIGNS ---------- */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
-  justify-content: center;
-  gap: 1.75rem;
-}
-figure { margin: 0; background: var(--paper); padding: 0.7rem 0.7rem 1rem; position: relative; }
-figure:nth-child(odd)  { transform: rotate(-1.5deg); }
-figure:nth-child(even) { transform: rotate(1.2deg); }
-figure::before {   /* the piece of tape */
-  content: ""; position: absolute; top: -10px; left: 50%;
-  width: 70px; height: 20px; margin-left: -35px;
-  background: var(--lilac); opacity: 0.85; transform: rotate(-3deg);
-}
-figure img, .placeholder { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--bg); }
-.placeholder { display: grid; place-items: center; color: var(--muted); font-size: 0.9rem; padding: 1rem; }
-figcaption { margin-top: 0.7rem; font-size: 0.95rem; }
-figcaption span { color: var(--muted); display: block; font-size: 0.85rem; }
-
-/* ---------- MUSIC ---------- */
-.tracks { list-style: none; margin: 1.5rem auto 0; padding: 0; max-width: 560px; }
-.tracks li {
-  display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
-  padding: 0.9rem 0; border-bottom: 2px solid var(--card);
-}
-.tracks .title { font-weight: 700; }
-.tracks .why { color: var(--muted); font-style: italic; font-size: 0.95rem; }
-
-footer { padding: 3rem 0 4rem; color: var(--muted); font-size: 0.95rem; }
-</style>
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="wrap">
-    <a href="#about">hello</a>
-    <a href="#blog">blog</a>
-    <a href="#favorites">favorites</a>
-    <a href="#designs">designs</a>
-    <a href="#music">music</a>
-  </div>
-</nav>
-
-<main class="wrap">
-
-  <!-- ===== INTRO: replace the text below with your own ===== -->
-  <header class="intro" id="about">
-    <h1>thyme + gunpowder</h1>
-    <p> thats the direct translation of my name into English, and i thought it kinda reflected me a lot heehee (there are multiple translations but this was the coolest)</p>
-    <p>i wanted to document parts of me so that i don't always feel like a newborn everytime i go through changes in my life </p>
-    <p class="small">Last updated: 10/27/2026</p>
-  </header>
-
-  <!-- ===== BLOG ===== -->
-  <section id="blog">
-    <h2>Blog</h2>
-
-    <!-- To add a new post, copy everything from <details> to </details> and paste it at the TOP of this list. -->
-    <details class="post" open>
-      <summary>My first post
-        <time datetime="2026-10-26">October 26, 2026</time>
-      </summary>
-      <p>This is where your writing goes. Click a post title to open or close it. Write whatever you want: a thought from your week, something you learned, a rant, a recommendation.</p>
-      <p>Add more paragraphs by wrapping each one in its own &lt;p&gt; tag.</p>
-    </details>
-
-    <details class="post">
-      <summary>Another post
-        <time datetime="2026-10-20">October 20, 2026</time>
-      </summary>
-      <p>Posts stay collapsed until someone clicks them, so the page stays tidy as your blog grows.</p>
-    </details>
-  </section>
-
-  <!-- ===== FAVORITE THINGS ===== -->
-  <section id="favorites">
-    <h2>Favorite things</h2>
-    <div class="favs">
-      <div class="fav-group">
-        <h3>Books</h3>
-        <ul>
-          <li>Book title, Author</li>
-          <li>Book title, Author</li>
-        </ul>
-      </div>
-      <div class="fav-group">
-        <h3>Shows &amp; movies</h3>
-        <ul>
-          <li>Title</li>
-          <li>Title</li>
-        </ul>
-      </div>
-      <div class="fav-group">
-        <h3>Food</h3>
-        <ul>
-          <li>A snack you always come back to</li>
-          <li>A meal that feels like home</li>
-        </ul>
-      </div>
-      <div class="fav-group">
-        <h3>Places</h3>
-        <ul>
-          <li>A spot you love</li>
-          <li>A place you want to visit</li>
-        </ul>
-      </div>
-    </div>
-    <!-- To add a new category, copy one <div class="fav-group"> block. -->
-  </section>
-
-  <!-- ===== GRAPHIC DESIGNS ===== -->
-  <section id="designs">
-    <h2>Graphic designs</h2>
-    <div class="gallery">
-
-      <!--
-        HOW TO ADD YOUR OWN IMAGE:
-        1. In your GitHub repository, click Add file > Upload files and upload your image (jpg, png, or webp).
-           Tip: keep each file under 1 MB so the page loads fast.
-        2. Replace the <div class="placeholder"> line below with:
-           <img src="your-file-name.jpg" alt="Describe the design in a few words">
-      -->
-      <figure>
-        <div class="placeholder">Your design goes here</div>
-        <figcaption>Title of the piece<span>Made with: Canva, Procreate, Photoshop...</span></figcaption>
-      </figure>
-
-      <figure>
-        <div class="placeholder">Your design goes here</div>
-        <figcaption>Title of the piece<span>Made with: ...</span></figcaption>
-      </figure>
-
-      <figure>
-        <div class="placeholder">Your design goes here</div>
-        <figcaption>Title of the piece<span>Made with: ...</span></figcaption>
-      </figure>
-
-    </div>
-  </section>
-
-  <!-- ===== MUSIC & INTERESTS ===== -->
-  <section id="music">
-    <h2>On repeat</h2>
-    <p>Songs I keep coming back to, and why. Link each one to Spotify, YouTube, or Bandcamp so people can listen.</p>
-
-    <ul class="tracks">
-      <li>
-        <span class="title">Song title</span>
-        <span><a href="https://open.spotify.com/" target="_blank" rel="noopener">Artist name</a></span>
-        <span class="why">Write a line or two about what this song means to you.</span>
-      </li>
-      <li>
-        <span class="title">Song title</span>
-        <span><a href="https://www.youtube.com/" target="_blank" rel="noopener">Artist name</a></span>
-        <span class="why">Your note on this one.</span>
-      </li>
-      <li>
-        <span class="title">Song title</span>
-        <span><a href="https://bandcamp.com/" target="_blank" rel="noopener">Artist name</a></span>
-        <span class="why">Your note on this one.</span>
-      </li>
-    </ul>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap">Made by Lily. Thanks for stopping by.</div>
-</footer>
-
-</body>
-</html>
-
+/* ---------- CONTACT ---------- */
+.links { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
